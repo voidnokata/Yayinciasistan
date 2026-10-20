@@ -1,0 +1,33 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs'),vm=require('node:vm');
+const core=require('../src/core/league-plan-core');
+const headers=['Lig','Sıra','Profil İsmi','Kullanıcı Adı','Kullanıcı Adı Durumu','Jeton','Backstage Durumu','Backstage Kontrol Zamanı'];
+const parsed=core.parseRows([headers,['C5',1,'Nickname','@person_a','structured',3000,'Uygun','2026-09-08T10:00:00Z'],['C5',2,'Not a handle','','live',5000],['C5',3,'Guess','guess','ocr_fallback',1000],['C5',4,'Zero','zero','structured',0,'Uygun','2026-09-08T10:00:00Z']]);
+assert.equal(parsed.skipped,2);assert.equal(parsed.rows.length,2);assert.equal(parsed.rows[1].coins,0);
+assert.throws(()=>core.parseRows([headers,['C5',1,'Name','user1','structured','','Uygun','2026-09-08T10:00:00Z']]),/sayısal/);
+assert.throws(()=>core.parseRows([['Profil İsmi','Jeton'],['nickname',100]]),/başlıkları/);
+assert.throws(()=>core.parseRows([headers,['C5',1,'Name','user1','structured','5K','Uygun','2026-09-08T10:00:00Z']]),/sayısal/);
+const merged=core.mergeRecords([...parsed.rows,{...parsed.rows[0],username:'PERSON_A',coins:2000}]);
+assert.equal(merged.duplicates,1);assert.equal(merged.conflicts,1);assert.equal(merged.rows[0].coins,3000);
+const members=[{name:'BURAK',priority:true},{name:'EMRİNA'},{name:'YAĞIZ'}];
+const rows=Array.from({length:10},(_,i)=>({username:`user_${i}`,coins:i*1100,sourceType:'league',backstageStatus:'eligible',backstageCheckedAt:'2026-09-08T10:00:00Z'}));
+const p=core.distribute(rows,members);
+assert.deepEqual(p.totals.map(m=>m.total),[4,3,3]);assert.equal(p.rows.length,10);
+for(const m of members){const group=p.rows.filter(r=>r.member===m.name);assert.ok(group.every((r,i)=>!i||group[i-1].coins>=r.coins));}
+assert.ok(p.rows.every(r=>!('classId' in r)));
+const now=Date.now(),history=[{createdAt:new Date(now).toISOString(),rows:[{username:'user_0',member:'BURAK',classId:3}]}];
+assert.equal(core.distribute(rows,members,history,now).waiting,1);
+const csv='\uFEFFLig;Sıra;Profil İsmi;Kullanıcı Adı;Kullanıcı Adı Durumu;Jeton;Backstage Durumu;Backstage Kontrol Zamanı\r\nC5;1;"İsim, Not";user_x;structured;"1.234";Uygun;2026-09-08T10:00:00Z';
+assert.equal(core.parseRows(core.parseCsv(csv)).rows[0].coins,1234);
+const context={window:{},TextEncoder,Uint8Array,DataView,Date,Blob,URL,console};
+vm.runInNewContext(fs.readFileSync(require.resolve('../src/core/xlsx-writer.js'),'utf8'),context);
+const text=Buffer.from(context.window.BTGXlsxWriter.buildTeamPlanWorkbook(p.rows,[],{league:true})).toString('utf8');
+assert.match(text,/>Jeton</);assert.doesNotMatch(text,/>Sınıf</);assert.match(text,/mergeCell ref="A4:A7"/);
+assert.match(text,/<c r="C4" s="10"><v>9900<\/v>/);
+assert.throws(()=>context.window.BTGXlsxWriter.buildTeamPlanWorkbook([{member:'A',username:'x',coins:NaN}],[],{league:true}),/Geçersiz jeton/);
+console.log('Lig planı: içe aktarma, eksik kayıt, CSV, tekilleştirme, dağıtım, geçmiş ve Excel testleri geçti.');
+
+assert.throws(()=>core.parseRows([['Kullanıcı Adı','Jeton'],['someone',15]]),/Backstage/);
+assert.throws(()=>core.distribute([{username:'raw_name',coins:10}],members),/Backstage/);
+for(const status of ['Uygun değil','Kontrol edilemedi',''])assert.equal(core.parseRows([headers,['C5',1,'Name','user1','structured',3,status,'2026-09-08T10:00:00Z']]).rows.length,0);
+assert.equal(core.parseRows([headers,['C5',1,'Name','user1','structured',3,'Uygun','']]).rows.length,0);

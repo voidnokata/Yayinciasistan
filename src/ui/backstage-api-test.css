@@ -1,0 +1,10 @@
+body { width: 100%; min-height: 100vh; }
+main { max-width: 780px; margin: 0 auto; }
+form { display: grid; gap: 12px; margin-top: 20px; }
+input { width: 100%; }
+p { line-height: 1.6; }
+section { margin-bottom: 18px; }
+#diagnostic { width: 100%; font-family: Consolas, monospace; font-size: 13px; }
+#copyStatus { min-height: 1.6em; }
+
+select { width: 100%; padding: 12px; color: var(--text); background: var(--surface-raised); border: 1px solid var(--border-strong); border-radius: 10px; }

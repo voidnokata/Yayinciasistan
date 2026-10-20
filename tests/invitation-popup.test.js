@@ -1,0 +1,108 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const vm=require('node:vm');
+const read=name=>fs.readFileSync(path.join(__dirname,'..',name),'utf8');
+function setup(saved={}) {
+  const nodes=new Map(),tabs=[],stored=structuredClone(saved);
+  const node=id=>{
+    if(!nodes.has(id)) nodes.set(id,{id,value:'',textContent:'',checked:false,disabled:false,hidden:false,listeners:{},classList:{toggle(){}},parentElement:{classList:{toggle(){}}},
+      addEventListener(event,fn){this.listeners[event]=fn;},setAttribute(){},replaceChildren(){},append(){}});
+    return nodes.get(id);
+  };
+  const settings={mode:'manual',message:'Common',minDelaySeconds:4,maxDelaySeconds:7,maxPerSession:50,...stored.settings};
+  const ctx={console,structuredClone,window:{},document:{getElementById:node,createElement:()=>node('temporary')},
+    chrome:{runtime:{getURL:x=>'extension/'+x,sendMessage:async()=>({ok:true,settings:stored.settings||settings,runtime:{running:false,logs:[]},history:{}})},
+      storage:{onChanged:{addListener(){}},local:{get:async()=>structuredClone(stored),set:async patch=>Object.assign(stored,structuredClone(patch))}},
+      tabs:{create:async x=>tabs.push(x)}}};
+  vm.createContext(ctx);vm.runInContext(read('src/ui/manual-list.js'),ctx);vm.runInContext(read('src/core/invitation-core.js'),ctx);
+  ctx.window.BTGSpreadsheetReader={readXlsxRows:async()=>[['Kullanıcı Adı','Davet Mesajı'],['first_user','Birinci mesaj\nİkinci satır'],['second_user','İkinci mesaj'],['empty_user','']]};
+  vm.runInContext(read('src/ui/popup.js'),ctx);
+  return {ctx,node,stored,tabs};
+}
+const settle=()=>new Promise(resolve=>setImmediate(resolve));
+(async()=>{
+  let s=setup();await settle();
+  assert.equal(s.node('invitationTools').hidden,true);
+  s.node('modeManual').checked=false;s.node('modeLive').checked=true;s.ctx.renderModeHint();
+  assert.equal(s.node('liveProfileMessageOption').hidden,false);
+  s.node('liveProfileMessaging').checked=true;
+  assert.equal(s.ctx.readSettings().liveProfileMessaging,true);
+  s.node('modeLive').checked=false;s.node('modeManual').checked=true;s.ctx.renderModeHint();
+  assert.equal(s.node('liveProfileMessageOption').hidden,false,'Listeden Kontrol profil gönderimi seçeneğini göstermeli');
+  assert.equal(s.ctx.readSettings().liveProfileMessaging,true);
+  assert.match(s.node('manualBackstageInfo').textContent,/İlişkiyi yönet/);
+  s.node('modeManual').checked=false;s.node('modeCollect').checked=true;s.ctx.renderModeHint();
+  assert.equal(s.node('liveProfileMessageOption').hidden,true);
+  assert.equal(s.ctx.readSettings().liveProfileMessaging,false);
+  s.node('liveProfileMessaging').checked=false;
+  assert.equal(s.node('invitationTools').hidden,false);
+  await s.node('invitationButton').listeners.click();assert.equal(s.tabs[0].url,'extension/src/ui/invitations.html');
+  s.node('modeManual').checked=true;s.node('modeCollect').checked=false;s.ctx.renderModeHint();
+  s.node('invitationFile').files=[{name:'davet.xlsx',arrayBuffer:async()=>new ArrayBuffer(0)}];
+  await s.node('invitationFile').listeners.change({target:s.node('invitationFile')});
+  assert.equal(s.node('manualUsernames').value,'first_user\nsecond_user');
+  assert.equal(s.node('message').hidden,true);
+  assert.match(s.node('invitationFileInfo').textContent,/1 boş/);
+  let settings=s.ctx.readSettings();assert.equal(settings.usePersonalizedMessages,true);
+  assert.equal(settings.personalizedMessages.first_user,'Birinci mesaj\nİkinci satır');
+  assert.equal(s.ctx.validateSettings(settings),'');
+  s.node('manualUsernames').value='second_user\nfirst_user';
+  s.node('manualUsernames').listeners.input();await settle();
+  s=setup(s.stored);await settle();
+  assert.equal(s.node('manualUsernames').value,'second_user\nfirst_user');
+  assert.equal(s.ctx.readSettings().personalizedMessages.second_user,'İkinci mesaj');
+  s.node('manualUsernames').value+='\nmissing_user';
+  assert.match(s.ctx.validateSettings(s.ctx.readSettings()),/missing_user/);
+  s.node('invitationFile').files=[{name:'wrong.txt',arrayBuffer:async()=>new ArrayBuffer(0)}];
+  await s.node('invitationFile').listeners.change({target:s.node('invitationFile')});
+  assert.equal(s.node('manualUsernames').value,'');
+  assert.equal(Object.keys(s.ctx.readSettings().personalizedMessages).length,0);
+  assert.equal(s.ctx.readSettings().usePersonalizedMessages,true);
+  s.stored.settings={mode:'manual',usePersonalizedMessages:true,personalizedMessages:{old_user:'old'},manualUsernamesText:'old_user'};
+  await s.node('clearInvitationFile').listeners.click();
+  assert.equal(s.ctx.readSettings().usePersonalizedMessages,false);
+  assert.equal(s.node('message').hidden,false);
+  s=setup(s.stored);await settle();
+  assert.equal(s.ctx.readSettings().usePersonalizedMessages,false);
+  assert.equal(s.node('manualUsernames').value,'');
+  s.ctx.renderRuntime({running:true});
+  assert.equal(s.node('invitationFile').disabled,true);assert.equal(s.node('clearInvitationFile').disabled,true);
+  assert.equal(s.node('standardListFile').disabled,true);
+  s.ctx.renderRuntime({running:false});
+  s.ctx.window.BTGSpreadsheetReader.readXlsxRows=async()=>[['Yayıncı ID','Sınıf','Kısa Değerlendirme'],['standard_one',1,'Yeni'],['standard_two',2,'Düzenli']];
+  s.node('standardListFile').files=[{name:'standart.xlsx',arrayBuffer:async()=>new ArrayBuffer(0)}];
+  await s.node('standardListFile').listeners.change({target:s.node('standardListFile')});
+  assert.equal(s.node('manualUsernames').value,'standard_one\nstandard_two');
+  assert.equal(s.ctx.readSettings().usePersonalizedMessages,false);assert.equal(s.node('message').hidden,false);
+  s=setup(s.stored);await settle();
+  assert.equal(s.node('manualUsernames').value,'standard_one\nstandard_two');assert.equal(s.ctx.readSettings().usePersonalizedMessages,false);
+  s.ctx.window.BTGSpreadsheetReader.readXlsxRows=async()=>[['Yayıncı ID','Sınıf'],['standard_one',1],['special_three',3]];
+  s.node('standardListFile').files=[{name:'karma.xlsx',arrayBuffer:async()=>new ArrayBuffer(0)}];
+  await s.node('standardListFile').listeners.change({target:s.node('standardListFile')});
+  assert.match(s.node('formError').textContent,/3. sınıflar var/);assert.equal(s.node('manualUsernames').value,'');
+  // Mevcut yayıncılara bilgilendirme dosyası ayrı bayrakla gelir ve yeniden açılışta korunur.
+  s.node('formError').textContent='';
+  s.ctx.window.BTGSpreadsheetReader.readXlsxRows=async()=>[['Kullanıcı Adı','Bilgilendirme Mesajı'],['star_one','Selamlar. Eksik: etkileşim'],['star_two','Selamlar. Eksik: görsel']];
+  s.node('invitationFile').files=[{name:'yildiz.xlsx',arrayBuffer:async()=>new ArrayBuffer(0)}];
+  await s.node('invitationFile').listeners.change({target:s.node('invitationFile')});
+  assert.equal(s.node('manualUsernames').value,'star_one\nstar_two');
+  assert.match(s.node('invitationFileInfo').textContent,/mevcut yayıncıya bilgilendirme/);
+  assert.match(s.node('manualBackstageInfo').textContent,/Uygun değil” etiketi ve eski sohbet engel değildir/);
+  settings=s.ctx.readSettings();
+  assert.equal(settings.existingCreatorNotice,true);assert.equal(settings.personalizedMessages.star_two,'Selamlar. Eksik: görsel');
+  assert.equal(s.ctx.validateSettings(settings),'');
+  s.node('liveProfileMessaging').checked=true;
+  assert.match(s.ctx.validateSettings(s.ctx.readSettings()),/yalnız Backstage Anlık mesajlar/);
+  s.node('liveProfileMessaging').checked=false;
+  s=setup(s.stored);await settle();
+  assert.equal(s.ctx.readSettings().existingCreatorNotice,true,'Bilgilendirme bayrağı pencere yeniden açılınca korunmalı');
+  s.ctx.window.BTGSpreadsheetReader.readXlsxRows=async()=>[['Kullanıcı Adı','Davet Mesajı'],['first_user','Davet']];
+  s.node('invitationFile').files=[{name:'davet.xlsx',arrayBuffer:async()=>new ArrayBuffer(0)}];
+  await s.node('invitationFile').listeners.change({target:s.node('invitationFile')});
+  assert.equal(s.ctx.readSettings().existingCreatorNotice,false,'Davet dosyası bilgilendirme bayrağını taşımamalı');
+  s.ctx.window.BTGSpreadsheetReader.readXlsxRows=async()=>[['Kullanıcı Adı','Davet Mesajı','Bilgilendirme Mesajı'],['first_user','a','b']];
+  await s.node('invitationFile').listeners.change({target:s.node('invitationFile')});
+  assert.match(s.node('formError').textContent,/aynı dosyada/);assert.equal(s.ctx.readSettings().existingCreatorNotice,false);
+  console.log('Popup: collect button, personalized XLSX import, reopen/order preservation, missing recipient validation, failed replacement and clear passed.');
+})().catch(e=>{console.error(e);process.exitCode=1;});

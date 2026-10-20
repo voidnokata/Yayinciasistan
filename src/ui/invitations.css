@@ -1,0 +1,5 @@
+#preview { display: grid; gap: 18px; }
+.invitation { border-top: 1px solid #45454c; padding-top: 16px; }
+.invitation h3 { margin: 0 0 8px; }
+.invitation textarea { box-sizing: border-box; width: 100%; min-height: 280px; padding: 14px; resize: vertical; background: #111116; color: #f5f3f4; border: 1px solid #555560; border-radius: 10px; font: inherit; line-height: 1.6; }
+.invitation p { white-space: pre-wrap; overflow-wrap: anywhere; }

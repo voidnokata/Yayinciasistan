@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BTG Yayıncı Asistanı</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <span class="brand-mark">BTG</span><h1>Yayıncı Asistanı</h1>
+        <select id="workspaceSelect" aria-label="Çalışma alanı"><option id="normalModeButton" value="normal">Normal</option><option id="feedbackModeButton" value="feedback">Geri bildirim</option></select>
+        <details class="tools-menu"><summary aria-label="Araçlar">•••</summary><div class="tools-options"><button id="teamPlanButton" type="button">Takım planı</button><button id="outputFolderButton" type="button">Çıktı klasörü</button><button id="weeklyStatusButton" type="button">Haftalık durum</button></div></details>
+      </header>
+      <div id="normalWorkspace">
+        <section class="status-card" aria-label="Oturum durumu">
+          <div class="session-toolbar">
+            <div class="session-heading"><div class="status-line"><span id="statusDot" class="status-dot" aria-hidden="true"></span><strong id="statusText" aria-live="polite">Hazır</strong></div><p id="operationSummary" class="operation-summary">CANLI · 50 kişi</p></div>
+            <div class="actions"><button id="startButton" class="primary" type="button"><span aria-hidden="true">▷</span> Başlat</button><button id="stopButton" class="secondary" type="button" disabled>Durdur</button></div>
+          </div>
+          <div class="stats" aria-label="Oturum sonuçları"><div><span id="sentCount">0</span><small id="sentCountLabel">Gönderildi</small></div><div><span id="skippedCount">0</span><small>Atlandı</small></div><div id="failedStat" aria-live="polite" aria-atomic="true"><span id="failedCount">0</span><small>Hata</small></div></div>
+          <p id="activityText" class="activity-text"></p>
+        </section>
+        <p id="formError" class="form-error" role="alert"></p>
+        <nav class="section-tabs" role="tablist" aria-label="Çalışma bölümleri">
+          <button id="flowTab" type="button" role="tab" aria-selected="true" aria-controls="flowPanel" data-panel="flowPanel">Akış</button>
+          <button id="messagesTab" type="button" role="tab" aria-selected="false" aria-controls="messagesPanel" data-panel="messagesPanel" tabindex="-1">Mesajlar</button>
+          <button id="recordsTab" type="button" role="tab" aria-selected="false" aria-controls="recordsPanel" data-panel="recordsPanel" tabindex="-1">Kayıtlar</button>
+        </nav>
+        <div class="workspace-content">
+          <section id="flowPanel" class="workspace-panel" role="tabpanel" aria-labelledby="flowTab">
+            <fieldset class="mode-picker"><legend>Çalışma akışı</legend>
+              <div class="mode-options">
+                <label><input id="modeLive" type="radio" name="mode" value="live"><span>CANLI Yayın</span></label>
+                <label><input id="modeMobile" type="radio" name="mode" value="mobile"><span>Mobil Telefon</span></label>
+                <label><input id="modeManual" type="radio" name="mode" value="manual"><span>Listeden Kontrol</span></label>
+                <label><input id="modeCollect" type="radio" name="mode" value="collect"><span>İsim toplama</span></label>
+                <label><input id="modePersonal" type="radio" name="mode" value="personal"><span>Kişisel mesaj</span></label>
+              </div>
+              <p id="modeHint" class="mode-hint"></p>
+              <div id="personalSourceOption" class="setting-option" hidden>
+                <div class="setting-row"><label for="personalSource">Yayıncı kaynağı</label><select id="personalSource"><option value="feed">Canlı akış (kaydırarak)</option><option value="tikleap">Tikleap ligleri (A1–D5)</option></select></div>
+                <details class="setting-help"><summary>Tikleap nasıl çalışır?</summary><p>Başlatınca Tikleap Türkiye liglerinde o an canlı görünen yayıncılar alınır. Geçme listesi ve mesaj geçmişi elendikten sonra kalanlar 30'arlı gruplar halinde Backstage “İlişkiyi yönet” davet sihirbazında kontrol edilir; yalnız 2. adımdaki durum okunur, davet gönderilmez. “Mevcut” çıkanlar için hâlâ canlı mı bakılır, profil yeni sekmede açılıp yayın verileri toplanır. Liste bitince model notu (.md) kaydedilir. Bir TikTok sekmesi ve Backstage “İlişkiyi yönet” sekmesi açık olmalı; Tikleap sekmesi gerekirse kendiliğinden açılır.</p></details>
+              </div>
+              <div id="liveProfileMessageOption" class="setting-option" hidden>
+                <label class="setting-row"><span>Mesajı profil üzerinden gönder</span><input id="liveProfileMessaging" type="checkbox"></label>
+                <details class="setting-help"><summary>Nasıl çalışır?</summary><p>Uygunluk Backstage “İlişkiyi yönet” ekranında kontrol edilir; mesaj kişinin TikTok profiline girilerek gönderilir.</p></details>
+              </div>
+              <div id="liveFollowerFilter" class="setting-option" hidden>
+                <div class="setting-row"><label for="minFollowers">Minimum takipçi</label><div class="number-input-row"><input id="minFollowers" type="number" min="0" max="1000000000" step="1" inputmode="numeric" placeholder="Filtre yok"><span>kişi</span></div></div>
+                <details class="setting-help"><summary>Filtre ayrıntısı</summary><p id="followerFilterInfo" class="list-file-info">Boş bırakırsanız minimum takipçi filtresi uygulanmaz.</p></details>
+              </div>
+              <div id="collectActiveDaysFilter" class="setting-option" hidden>
+                <label class="setting-row"><span>Son 14 günde en az 5 yayın günü</span><input id="requireFiveActiveDays" type="checkbox"></label>
+                <details class="setting-help"><summary>Günler nasıl sayılır?</summary><p>Aynı günün yayınları tek gün sayılır; bugünkü canlı yayın dahildir. Yayın geçmişi okunamayan hesaplar da elenir.</p></details>
+              </div>
+              <div id="invitationTools" class="setting-option" hidden><button id="invitationButton" class="secondary" type="button">3. sınıflara özel davet hazırla</button><p class="list-file-info">İsim Toplama Excel’indeki kayıtlı yayın verilerinden mesaj hazırlar.</p></div>
+              <div id="manualList" class="manual-list" hidden>
+                <label for="standardListFile">Standart liste Excel’i (3. sınıflar hariç)</label><input id="standardListFile" type="file" accept=".xlsx">
+                <label for="invitationFile">Özel davet Excel’i</label><input id="invitationFile" type="file" accept=".xlsx">
+                <p id="invitationFileInfo" class="list-file-info" role="status"></p><button id="clearInvitationFile" class="secondary" type="button" hidden>Özel mesajları kaldır, ortak mesaja dön</button>
+                <label for="manualUsernames">Yayıncı kullanıcı adları</label><textarea id="manualUsernames" rows="4" spellcheck="false" placeholder="resool0728&#10;miar_mobel&#10;miranalan21"></textarea>
+                <p id="manualListInfo" class="list-file-info">Her satıra bir TikTok kullanıcı adı girin.</p>
+                <label class="manual-option" hidden><input id="skipBackstageCheck" type="checkbox" disabled><span>Backstage kontrolü yapma</span></label>
+                <p id="manualBackstageInfo" class="list-file-info">Backstage “Anlık mesajlar” sekmesi açık olmalıdır. Uygun olmayan ve geçmişte işlenen hesaplar atlanır.</p>
+              </div>
+            </fieldset>
+            <div class="grid">
+              <label id="minDelayLabel">En az bekleme<span><input id="minDelay" type="number" min="2" max="120" aria-label="En az bekleme, saniye"> sn.</span></label>
+              <label id="maxDelayLabel">En çok bekleme<span><input id="maxDelay" type="number" min="2" max="180" aria-label="En çok bekleme, saniye"> sn.</span></label>
+              <label id="maxPerSessionField"><span id="maxPerSessionLabel">Başarılı DM limiti</span><span><input id="maxPerSession" type="number" min="1" max="500" aria-label="Oturum limiti, kişi"> kişi</span></label>
+            </div>
+            <details id="activityDetails" class="activity-details" hidden><summary>Son işlem ayrıntısı</summary><p id="activityDetailsText" class="list-file-info"></p><p id="timingText" class="list-file-info"></p></details>
+          </section>
+          <section id="messagesPanel" class="workspace-panel" role="tabpanel" aria-labelledby="messagesTab" hidden>
+            <div id="messageGroup" class="message-group">
+              <label id="messageLabel" class="sr-only" for="message">Hazır DM mesajları</label>
+              <div class="message-toolbar"><label for="messageSize">Boyut<select id="messageSize"><option value="compact">Kompakt</option><option value="normal">Normal</option><option value="large">Geniş</option></select></label><button id="foldAllMessages" class="quiet" type="button" aria-expanded="true">Tümünü katla</button></div>
+              <article class="message-variant" data-message="message"><div class="message-heading"><label for="message">Mesaj 1</label><button class="message-toggle quiet" type="button" data-message-toggle="message" aria-label="Mesaj 1 alanını katla" aria-expanded="true" aria-controls="messageBody"><span aria-hidden="true">⌃</span></button></div><div id="messageBody"><textarea id="message" rows="2" spellcheck="false"></textarea></div><p class="message-preview" hidden></p></article>
+              <article class="message-variant" data-message="message2"><div class="message-heading"><label for="message2">Mesaj 2</label><button class="message-toggle quiet" type="button" data-message-toggle="message2" aria-label="Mesaj 2 alanını katla" aria-expanded="true" aria-controls="message2Body"><span aria-hidden="true">⌃</span></button></div><div id="message2Body"><textarea id="message2" rows="2" spellcheck="false"></textarea></div><p class="message-preview" hidden></p></article>
+              <article class="message-variant" data-message="message3"><div class="message-heading"><label for="message3">Mesaj 3</label><button class="message-toggle quiet" type="button" data-message-toggle="message3" aria-label="Mesaj 3 alanını katla" aria-expanded="true" aria-controls="message3Body"><span aria-hidden="true">⌃</span></button></div><div id="message3Body"><textarea id="message3" rows="2" spellcheck="false"></textarea></div><p class="message-preview" hidden></p></article>
+              <p class="message-note">Dolu mesajlardan biri rastgele seçilir. Boş kutular kullanılmaz.</p>
+            </div>
+            <p id="messageUnavailable" class="empty" hidden></p>
+          </section>
+          <section id="recordsPanel" class="workspace-panel" role="tabpanel" aria-labelledby="recordsTab" hidden>
+            <section class="log-card"><div class="log-header"><h2>Son işlemler</h2></div><div class="log-header-actions"><button id="exportReportButton" class="secondary" type="button" disabled>Excel raporu</button><button id="exportDiagnosticsButton" class="secondary" type="button">Tanılama indir</button></div><div id="logs" class="logs"><p class="empty">Henüz işlem yok.</p></div></section>
+            <section class="history-card"><div class="history-title"><h2>Denenmiş yayıncılar</h2><strong id="historyCount">0</strong></div><p class="list-file-info">Aynı yayıncı sonraki oturumlarda yeniden kontrol edilmez.</p><div class="history-actions"><button id="exportHistoryButton" class="secondary" type="button">Dosyayı indir</button><button id="importHistoryButton" class="secondary" type="button">Dosyadan yükle</button><button id="clearHistoryButton" class="danger-quiet" type="button">Temizle</button><input id="historyFileInput" type="file" accept=".json,application/json" hidden></div><p id="historyMessage" class="history-message" role="status"></p></section>
+          </section>
+        </div>
+      </div>
+      <div id="feedbackWorkspace" hidden><iframe id="feedbackFrame" title="Geri bildirim çalışma alanı" src="feedback.html?embedded=1"></iframe></div>
+    </main>
+    <script src="manual-list.js"></script><script src="../core/xlsx-reader.js"></script><script src="../core/invitation-core.js"></script><script src="../core/xlsx-writer.js"></script><script src="../core/output-folder.js"></script><script src="popup-layout.js"></script><script src="popup.js"></script><script src="feedback-frame-size.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1497 @@
+{
+  "schemaVersion": 1,
+  "note": "Synthetic fixture for tests. Fake usernames, durations and counts only.",
+  "cases": [
+    {
+      "caseId": "P002",
+      "messageBrief": {
+        "version": 2,
+        "responseMode": "focus",
+        "recordKey": "P002:1",
+        "creatorKey": "username:fixture_user",
+        "username": "fixture_user",
+        "policyVersion": 6,
+        "firstFeedback": true,
+        "observationWindow": {
+          "from": "2026-09-07",
+          "to": "2026-09-20",
+          "complete": true,
+          "days": 14
+        },
+        "overallContext": {
+          "activityComparison": {
+            "comparable": true,
+            "durationChangeRatio": 0,
+            "durationPreserved": true,
+            "fewerDaysWithPreservedDuration": false,
+            "significantDurationDrop": false
+          },
+          "coverage": {
+            "from": "2026-09-07",
+            "to": "2026-09-20",
+            "complete": true,
+            "missingDates": [],
+            "duplicateDates": [],
+            "beforeJoining": false
+          },
+          "observation": {
+            "activeDays": 14,
+            "observedActiveDays": 14,
+            "durationSeconds": 50400,
+            "diamonds": 0,
+            "lastActiveDate": "2026-09-20"
+          },
+          "previous7": {
+            "from": "2026-09-07",
+            "to": "2026-09-13",
+            "complete": true,
+            "activeDays": 7,
+            "durationSeconds": 25200,
+            "diamonds": 0,
+            "diamondsPerHour": 0
+          },
+          "recent7": {
+            "from": "2026-09-14",
+            "to": "2026-09-20",
+            "complete": true,
+            "activeDays": 7,
+            "durationSeconds": 25200,
+            "diamonds": 0,
+            "diamondsPerHour": 0
+          },
+          "sessions": {
+            "observedCount": 2,
+            "recentCount": 2,
+            "observedActiveDays": 2,
+            "timezone": "unverified"
+          },
+          "regularity": "regular"
+        },
+        "primary": {
+          "id": "P002:1:short-watch",
+          "key": "short-watch",
+          "priority": 86,
+          "topic": "Görülen yayınlarda 25 saniye altı izleme",
+          "meaning": "Son yedi gündeki ölçülebilir 2 yayının 2 tanesinde izleyici başına ortalama izleme 25 saniyenin altında. Yalnız iki veya üç ölçüm var: “bu yayınlarda” diyerek sınırla; “sık tekrarlanıyor”, “genellikle” veya kalıcı alışkanlık deme. Gelenlerin yayında daha uzun kalmasına odaklanılmasını öner.",
+          "evidenceIds": [
+            "P002:1:watch-frequency",
+            "P002:1:s1",
+            "P002:1:s0"
+          ],
+          "adviceCodes": [
+            "BS-I05"
+          ],
+          "limits": [
+            "Yalnız görülebilen, ölçülebilir yayınlar sayıldı. Ortalamaları yeniden ortalama alma. Bu eşik ajans hedefidir; izleyicilerin neden veya hangi anda ayrıldığı bilinmiyor."
+          ],
+          "role": "topic",
+          "confidence": "high",
+          "actions": [
+            {
+              "code": "BS-I05",
+              "family": "retention-focus",
+              "step": "Verilen tarihlerdeki kısa ortalama izlemeyi açıkça belirt ve izleyicilerin yayında daha uzun kalmasına odaklanılmasını öner. Veride belirli bir yöntemin dayanağı yoksa burada bitir; açılış cümlesi, içerik anlatma, soru sorma veya başka hazır reçete ekleme.",
+              "recentlySent": false
+            }
+          ],
+          "selectedAdviceCode": "BS-I05",
+          "repeatNote": null
+        },
+        "support": [
+          {
+            "id": "P002:1:maintain",
+            "key": "maintain",
+            "priority": 10,
+            "topic": "Görülen güçlü düzeni destekleme",
+            "meaning": "Mevcut gözlem penceresinde birden fazla yayın günü var. Yalnız başka anlamlı ihtiyaç yoksa somut düzeni destekleyen kısa mesaj yeterli.",
+            "evidenceIds": [
+              "P002:1:observation"
+            ],
+            "adviceCodes": [
+              "BS-K01"
+            ],
+            "limits": [],
+            "role": "topic",
+            "confidence": "high",
+            "actions": [
+              {
+                "code": "BS-K01",
+                "family": "maintain",
+                "step": "Görülen güçlü yönü, onu destekleyen somut gözlemle olumla. Yeni sorun veya gereksiz görev ekleme.",
+                "recentlySent": false
+              }
+            ],
+            "selectedAdviceCode": "BS-K01",
+            "repeatNote": null
+          }
+        ],
+        "topicCandidates": [
+          {
+            "id": "P002:1:short-watch",
+            "key": "short-watch",
+            "priority": 86,
+            "topic": "Görülen yayınlarda 25 saniye altı izleme",
+            "meaning": "Son yedi gündeki ölçülebilir 2 yayının 2 tanesinde izleyici başına ortalama izleme 25 saniyenin altında. Yalnız iki veya üç ölçüm var: “bu yayınlarda” diyerek sınırla; “sık tekrarlanıyor”, “genellikle” veya kalıcı alışkanlık deme. Gelenlerin yayında daha uzun kalmasına odaklanılmasını öner.",
+            "evidenceIds": [
+              "P002:1:watch-frequency",
+              "P002:1:s1",
+              "P002:1:s0"
+            ],
+            "adviceCodes": [
+              "BS-I05"
+            ],
+            "limits": [
+              "Yalnız görülebilen, ölçülebilir yayınlar sayıldı. Ortalamaları yeniden ortalama alma. Bu eşik ajans hedefidir; izleyicilerin neden veya hangi anda ayrıldığı bilinmiyor."
+            ],
+            "role": "topic",
+            "confidence": "high",
+            "actions": [
+              {
+                "code": "BS-I05",
+                "family": "retention-focus",
+                "step": "Verilen tarihlerdeki kısa ortalama izlemeyi açıkça belirt ve izleyicilerin yayında daha uzun kalmasına odaklanılmasını öner. Veride belirli bir yöntemin dayanağı yoksa burada bitir; açılış cümlesi, içerik anlatma, soru sorma veya başka hazır reçete ekleme.",
+                "recentlySent": false
+              }
+            ],
+            "selectedAdviceCode": "BS-I05",
+            "repeatNote": null
+          },
+          {
+            "id": "P002:1:maintain",
+            "key": "maintain",
+            "priority": 10,
+            "topic": "Görülen güçlü düzeni destekleme",
+            "meaning": "Mevcut gözlem penceresinde birden fazla yayın günü var. Yalnız başka anlamlı ihtiyaç yoksa somut düzeni destekleyen kısa mesaj yeterli.",
+            "evidenceIds": [
+              "P002:1:observation"
+            ],
+            "adviceCodes": [
+              "BS-K01"
+            ],
+            "limits": [],
+            "role": "topic",
+            "confidence": "high",
+            "actions": [
+              {
+                "code": "BS-K01",
+                "family": "maintain",
+                "step": "Görülen güçlü yönü, onu destekleyen somut gözlemle olumla. Yeni sorun veya gereksiz görev ekleme.",
+                "recentlySent": false
+              }
+            ],
+            "selectedAdviceCode": "BS-K01",
+            "repeatNote": null
+          }
+        ],
+        "supportingObservations": [],
+        "requiredFindingIds": [
+          "P002:1:short-watch"
+        ],
+        "evidence": [
+          {
+            "id": "P002:1:watch-frequency",
+            "kind": "session_pattern",
+            "source": "calculatedFacts.sessions",
+            "from": "2026-09-14",
+            "to": "2026-09-20",
+            "thresholdSeconds": 25,
+            "belowThresholdCount": 2,
+            "measuredSessionCount": 2,
+            "belowThresholdShare": 1,
+            "scope": "observed_sessions",
+            "languageScope": "observed_lives",
+            "observations": [
+              {
+                "factId": "fixture_user:session:0",
+                "source": "sessions.rows[0]",
+                "displayedDate": "2026-09-19",
+                "averageWatchSeconds": 9
+              },
+              {
+                "factId": "fixture_user:session:1",
+                "source": "sessions.rows[1]",
+                "displayedDate": "2026-09-20",
+                "averageWatchSeconds": 12
+              }
+            ],
+            "display": {
+              "duration": null,
+              "averageWatch": null,
+              "diamonds": null
+            }
+          },
+          {
+            "id": "P002:1:s1",
+            "kind": "single_live",
+            "factId": "fixture_user:session:1",
+            "source": "sessions.rows[1]",
+            "start": "20.09.2026 12:00:00",
+            "displayedDate": "2026-09-20",
+            "durationSeconds": 1800,
+            "meets60Minutes": false,
+            "secondsTo60Minutes": 1800,
+            "diamonds": 0,
+            "viewers": 100,
+            "averageWatchSeconds": 12,
+            "type": "Normal",
+            "newFollowers": null,
+            "commenters": null,
+            "gifters": null,
+            "impressions": null,
+            "display": {
+              "duration": "30 dakika",
+              "averageWatch": "12 saniye",
+              "diamonds": "0"
+            }
+          },
+          {
+            "id": "P002:1:s0",
+            "kind": "single_live",
+            "factId": "fixture_user:session:0",
+            "source": "sessions.rows[0]",
+            "start": "19.09.2026 12:00:00",
+            "displayedDate": "2026-09-19",
+            "durationSeconds": 1800,
+            "meets60Minutes": false,
+            "secondsTo60Minutes": 1800,
+            "diamonds": 0,
+            "viewers": 100,
+            "averageWatchSeconds": 9,
+            "type": "Normal",
+            "newFollowers": null,
+            "commenters": null,
+            "gifters": null,
+            "impressions": null,
+            "display": {
+              "duration": "30 dakika",
+              "averageWatch": "9 saniye",
+              "diamonds": "0"
+            }
+          },
+          {
+            "id": "P002:1:observation",
+            "kind": "daily_period",
+            "from": "2026-09-07",
+            "to": "2026-09-20",
+            "calendarDays": 14,
+            "source": "calculatedFacts.observation",
+            "timezone": "UTC",
+            "complete": true,
+            "missingDates": [],
+            "duplicateDates": [],
+            "beforeJoining": false,
+            "activeDates": [
+              "2026-09-07",
+              "2026-09-08",
+              "2026-09-09",
+              "2026-09-10",
+              "2026-09-11",
+              "2026-09-12",
+              "2026-09-13",
+              "2026-09-14",
+              "2026-09-15",
+              "2026-09-16",
+              "2026-09-17",
+              "2026-09-18",
+              "2026-09-19",
+              "2026-09-20"
+            ],
+            "lastActiveDate": "2026-09-20",
+            "observedActiveDays": 14,
+            "activeDays": 14,
+            "durationSeconds": 50400,
+            "diamonds": 0,
+            "newFollowers": 0,
+            "diamondsPerHour": 0,
+            "display": {
+              "duration": "14 saat",
+              "averageWatch": null,
+              "diamonds": "0"
+            }
+          }
+        ],
+        "checks": [
+          {
+            "area": "session-integrity",
+            "invalidSessionDates": 0,
+            "duplicateSessionCount": 0
+          },
+          {
+            "area": "regularity",
+            "result": "observed-window-usable",
+            "zeroConflict": false
+          },
+          {
+            "area": "diamonds",
+            "result": "no-material-change",
+            "previous": 0,
+            "recent": 0
+          }
+        ],
+        "limits": [
+          "Günlük toplam tek yayın değildir. Günlük UTC ile yayınların görüntülenen tarihlerini birleştirme.",
+          "Veri yayın içeriğini, teknik sorunu ve davranışın nedenini göstermez.",
+          "Geçerli yayın günü sayısı hesaplanmadı."
+        ],
+        "previousSentMessages": [],
+        "noMessageReason": null,
+        "noMessageDetails": null,
+        "considered": [
+          {
+            "id": "P002:1:short-watch",
+            "key": "short-watch",
+            "priority": 86,
+            "topic": "Görülen yayınlarda 25 saniye altı izleme",
+            "role": "topic",
+            "selected": true
+          },
+          {
+            "id": "P002:1:maintain",
+            "key": "maintain",
+            "priority": 10,
+            "topic": "Görülen güçlü düzeni destekleme",
+            "role": "topic",
+            "selected": true
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "P006",
+      "messageBrief": {
+        "version": 2,
+        "responseMode": "no_message",
+        "recordKey": "P006:1",
+        "creatorKey": "username:fixture_user",
+        "username": "fixture_user",
+        "policyVersion": 6,
+        "firstFeedback": true,
+        "observationWindow": {
+          "from": "2026-09-07",
+          "to": "2026-09-20",
+          "complete": true,
+          "days": 14
+        },
+        "overallContext": {
+          "activityComparison": {
+            "comparable": true,
+            "durationChangeRatio": null,
+            "durationPreserved": false,
+            "fewerDaysWithPreservedDuration": false,
+            "significantDurationDrop": false
+          },
+          "coverage": {
+            "from": "2026-09-07",
+            "to": "2026-09-20",
+            "complete": true,
+            "missingDates": [],
+            "duplicateDates": [],
+            "beforeJoining": false
+          },
+          "observation": {
+            "activeDays": 0,
+            "observedActiveDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 2100,
+            "lastActiveDate": null
+          },
+          "previous7": {
+            "from": "2026-09-07",
+            "to": "2026-09-13",
+            "complete": true,
+            "activeDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 630,
+            "diamondsPerHour": null
+          },
+          "recent7": {
+            "from": "2026-09-14",
+            "to": "2026-09-20",
+            "complete": true,
+            "activeDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 1470,
+            "diamondsPerHour": null
+          },
+          "sessions": {
+            "observedCount": 1,
+            "recentCount": 1,
+            "observedActiveDays": 1,
+            "timezone": "unverified"
+          },
+          "regularity": "regular"
+        },
+        "primary": null,
+        "support": [],
+        "topicCandidates": [],
+        "supportingObservations": [],
+        "requiredFindingIds": [],
+        "evidence": [],
+        "checks": [
+          {
+            "area": "session-integrity",
+            "invalidSessionDates": 0,
+            "duplicateSessionCount": 0
+          },
+          {
+            "area": "regularity",
+            "result": "observed-window-usable",
+            "zeroConflict": true
+          },
+          {
+            "area": "diamonds",
+            "result": "no-material-change",
+            "previous": 630,
+            "recent": 1470
+          }
+        ],
+        "limits": [
+          "Günlük toplam tek yayın değildir. Günlük UTC ile yayınların görüntülenen tarihlerini birleştirme.",
+          "Veri yayın içeriğini, teknik sorunu ve davranışın nedenini göstermez.",
+          "Geçerli yayın günü sayısı hesaplanmadı."
+        ],
+        "previousSentMessages": [],
+        "noMessageReason": "Son yedi günde görülen tek yayın: 1; tekil günlük satır: 7; ölçülebilir izleme: 1; 25 saniye altı: 1; görülen kısa yayın günü: 1. Mevcut kayıtlardan güvenilir bir ana mesaj konusu seçilemedi; senaryo koşulları veya konu için gereken kapsam sağlanmadı. Eksik kayıt, normal performans ve devamsızlık aynı şey değildir.",
+        "noMessageDetails": {
+          "recentSessionCount": 1,
+          "recentDailyRowCount": 7,
+          "recentObservedActiveDays": 0,
+          "measuredWatchCount": 1,
+          "belowWatchThresholdCount": 1,
+          "observedShortDays": 1,
+          "invalidSessionDates": 0,
+          "duplicateSessionCount": 0,
+          "dailyCoverageComplete": true,
+          "sessionTableComplete": true,
+          "missingDailyDates": [],
+          "duplicateDailyDates": []
+        },
+        "considered": []
+      }
+    },
+    {
+      "caseId": "P010",
+      "messageBrief": {
+        "version": 2,
+        "responseMode": "no_message",
+        "recordKey": "P010:1",
+        "creatorKey": "username:fixture_user",
+        "username": "fixture_user",
+        "policyVersion": 6,
+        "firstFeedback": true,
+        "observationWindow": {
+          "from": "2026-09-07",
+          "to": "2026-09-20",
+          "complete": true,
+          "days": 14
+        },
+        "overallContext": {
+          "activityComparison": {
+            "comparable": true,
+            "durationChangeRatio": null,
+            "durationPreserved": false,
+            "fewerDaysWithPreservedDuration": false,
+            "significantDurationDrop": false
+          },
+          "coverage": {
+            "from": "2026-09-07",
+            "to": "2026-09-20",
+            "complete": true,
+            "missingDates": [],
+            "duplicateDates": [],
+            "beforeJoining": false
+          },
+          "observation": {
+            "activeDays": 0,
+            "observedActiveDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 1714,
+            "lastActiveDate": null
+          },
+          "previous7": {
+            "from": "2026-09-07",
+            "to": "2026-09-13",
+            "complete": true,
+            "activeDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 420,
+            "diamondsPerHour": null
+          },
+          "recent7": {
+            "from": "2026-09-14",
+            "to": "2026-09-20",
+            "complete": true,
+            "activeDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 1294,
+            "diamondsPerHour": null
+          },
+          "sessions": {
+            "observedCount": 1,
+            "recentCount": 1,
+            "observedActiveDays": 1,
+            "timezone": "unverified"
+          },
+          "regularity": "regular"
+        },
+        "primary": null,
+        "support": [],
+        "topicCandidates": [],
+        "supportingObservations": [],
+        "requiredFindingIds": [],
+        "evidence": [],
+        "checks": [
+          {
+            "area": "session-integrity",
+            "invalidSessionDates": 0,
+            "duplicateSessionCount": 0
+          },
+          {
+            "area": "regularity",
+            "result": "observed-window-usable",
+            "zeroConflict": true
+          },
+          {
+            "area": "diamonds",
+            "result": "no-material-change",
+            "previous": 420,
+            "recent": 1294
+          }
+        ],
+        "limits": [
+          "Günlük toplam tek yayın değildir. Günlük UTC ile yayınların görüntülenen tarihlerini birleştirme.",
+          "Veri yayın içeriğini, teknik sorunu ve davranışın nedenini göstermez.",
+          "Geçerli yayın günü sayısı hesaplanmadı."
+        ],
+        "previousSentMessages": [],
+        "noMessageReason": "Son yedi günde görülen tek yayın: 1; tekil günlük satır: 7; ölçülebilir izleme: 1; 25 saniye altı: 1; görülen kısa yayın günü: 1. Mevcut kayıtlardan güvenilir bir ana mesaj konusu seçilemedi; senaryo koşulları veya konu için gereken kapsam sağlanmadı. Eksik kayıt, normal performans ve devamsızlık aynı şey değildir.",
+        "noMessageDetails": {
+          "recentSessionCount": 1,
+          "recentDailyRowCount": 7,
+          "recentObservedActiveDays": 0,
+          "measuredWatchCount": 1,
+          "belowWatchThresholdCount": 1,
+          "observedShortDays": 1,
+          "invalidSessionDates": 0,
+          "duplicateSessionCount": 0,
+          "dailyCoverageComplete": true,
+          "sessionTableComplete": true,
+          "missingDailyDates": [],
+          "duplicateDailyDates": []
+        },
+        "considered": []
+      }
+    },
+    {
+      "caseId": "P021",
+      "messageBrief": {
+        "version": 2,
+        "responseMode": "affirmation",
+        "recordKey": "P021:1",
+        "creatorKey": "username:fixture_user",
+        "username": "fixture_user",
+        "policyVersion": 6,
+        "firstFeedback": true,
+        "observationWindow": {
+          "from": "2026-09-07",
+          "to": "2026-09-20",
+          "complete": true,
+          "days": 14
+        },
+        "overallContext": {
+          "activityComparison": {
+            "comparable": true,
+            "durationChangeRatio": 0,
+            "durationPreserved": true,
+            "fewerDaysWithPreservedDuration": false,
+            "significantDurationDrop": false
+          },
+          "coverage": {
+            "from": "2026-09-07",
+            "to": "2026-09-20",
+            "complete": true,
+            "missingDates": [],
+            "duplicateDates": [],
+            "beforeJoining": false
+          },
+          "observation": {
+            "activeDays": 6,
+            "observedActiveDays": 6,
+            "durationSeconds": 21600,
+            "diamonds": 0,
+            "lastActiveDate": "2026-09-16"
+          },
+          "previous7": {
+            "from": "2026-09-07",
+            "to": "2026-09-13",
+            "complete": true,
+            "activeDays": 3,
+            "durationSeconds": 10800,
+            "diamonds": 0,
+            "diamondsPerHour": 0
+          },
+          "recent7": {
+            "from": "2026-09-14",
+            "to": "2026-09-20",
+            "complete": true,
+            "activeDays": 3,
+            "durationSeconds": 10800,
+            "diamonds": 0,
+            "diamondsPerHour": 0
+          },
+          "sessions": {
+            "observedCount": 0,
+            "recentCount": 0,
+            "observedActiveDays": 0,
+            "timezone": "unverified"
+          },
+          "regularity": "regular"
+        },
+        "primary": {
+          "id": "P021:1:maintain",
+          "key": "maintain",
+          "priority": 10,
+          "topic": "Görülen güçlü düzeni destekleme",
+          "meaning": "Mevcut gözlem penceresinde birden fazla yayın günü var. Yalnız başka anlamlı ihtiyaç yoksa somut düzeni destekleyen kısa mesaj yeterli.",
+          "evidenceIds": [
+            "P021:1:observation"
+          ],
+          "adviceCodes": [
+            "BS-K01"
+          ],
+          "limits": [],
+          "role": "topic",
+          "confidence": "high",
+          "actions": [
+            {
+              "code": "BS-K01",
+              "family": "maintain",
+              "step": "Görülen güçlü yönü, onu destekleyen somut gözlemle olumla. Yeni sorun veya gereksiz görev ekleme.",
+              "recentlySent": false
+            }
+          ],
+          "selectedAdviceCode": "BS-K01",
+          "repeatNote": null
+        },
+        "support": [],
+        "topicCandidates": [
+          {
+            "id": "P021:1:maintain",
+            "key": "maintain",
+            "priority": 10,
+            "topic": "Görülen güçlü düzeni destekleme",
+            "meaning": "Mevcut gözlem penceresinde birden fazla yayın günü var. Yalnız başka anlamlı ihtiyaç yoksa somut düzeni destekleyen kısa mesaj yeterli.",
+            "evidenceIds": [
+              "P021:1:observation"
+            ],
+            "adviceCodes": [
+              "BS-K01"
+            ],
+            "limits": [],
+            "role": "topic",
+            "confidence": "high",
+            "actions": [
+              {
+                "code": "BS-K01",
+                "family": "maintain",
+                "step": "Görülen güçlü yönü, onu destekleyen somut gözlemle olumla. Yeni sorun veya gereksiz görev ekleme.",
+                "recentlySent": false
+              }
+            ],
+            "selectedAdviceCode": "BS-K01",
+            "repeatNote": null
+          }
+        ],
+        "supportingObservations": [],
+        "requiredFindingIds": [],
+        "evidence": [
+          {
+            "id": "P021:1:observation",
+            "kind": "daily_period",
+            "from": "2026-09-07",
+            "to": "2026-09-20",
+            "calendarDays": 14,
+            "source": "calculatedFacts.observation",
+            "timezone": "UTC",
+            "complete": true,
+            "missingDates": [],
+            "duplicateDates": [],
+            "beforeJoining": false,
+            "activeDates": [
+              "2026-09-07",
+              "2026-09-08",
+              "2026-09-09",
+              "2026-09-14",
+              "2026-09-15",
+              "2026-09-16"
+            ],
+            "lastActiveDate": "2026-09-16",
+            "observedActiveDays": 6,
+            "activeDays": 6,
+            "durationSeconds": 21600,
+            "diamonds": 0,
+            "newFollowers": 0,
+            "diamondsPerHour": 0,
+            "display": {
+              "duration": "6 saat",
+              "averageWatch": null,
+              "diamonds": "0"
+            }
+          }
+        ],
+        "checks": [
+          {
+            "area": "session-integrity",
+            "invalidSessionDates": 0,
+            "duplicateSessionCount": 0
+          },
+          {
+            "area": "regularity",
+            "result": "observed-window-usable",
+            "zeroConflict": false
+          },
+          {
+            "area": "diamonds",
+            "result": "no-material-change",
+            "previous": 0,
+            "recent": 0
+          }
+        ],
+        "limits": [
+          "Günlük toplam tek yayın değildir. Günlük UTC ile yayınların görüntülenen tarihlerini birleştirme.",
+          "Veri yayın içeriğini, teknik sorunu ve davranışın nedenini göstermez.",
+          "Geçerli yayın günü sayısı hesaplanmadı."
+        ],
+        "previousSentMessages": [],
+        "noMessageReason": null,
+        "noMessageDetails": null,
+        "considered": [
+          {
+            "id": "P021:1:maintain",
+            "key": "maintain",
+            "priority": 10,
+            "topic": "Görülen güçlü düzeni destekleme",
+            "role": "topic",
+            "selected": true
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "P011",
+      "messageBrief": {
+        "version": 2,
+        "responseMode": "focus",
+        "recordKey": "P011:1",
+        "creatorKey": "username:fixture_user",
+        "username": "fixture_user",
+        "policyVersion": 6,
+        "firstFeedback": true,
+        "observationWindow": {
+          "from": "2026-09-07",
+          "to": "2026-09-20",
+          "complete": true,
+          "days": 14
+        },
+        "overallContext": {
+          "activityComparison": {
+            "comparable": true,
+            "durationChangeRatio": null,
+            "durationPreserved": false,
+            "fewerDaysWithPreservedDuration": false,
+            "significantDurationDrop": false
+          },
+          "coverage": {
+            "from": "2026-09-07",
+            "to": "2026-09-20",
+            "complete": true,
+            "missingDates": [],
+            "duplicateDates": [],
+            "beforeJoining": false
+          },
+          "observation": {
+            "activeDays": 0,
+            "observedActiveDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 0,
+            "lastActiveDate": null
+          },
+          "previous7": {
+            "from": "2026-09-07",
+            "to": "2026-09-13",
+            "complete": true,
+            "activeDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 0,
+            "diamondsPerHour": null
+          },
+          "recent7": {
+            "from": "2026-09-14",
+            "to": "2026-09-20",
+            "complete": true,
+            "activeDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 0,
+            "diamondsPerHour": null
+          },
+          "sessions": {
+            "observedCount": 2,
+            "recentCount": 2,
+            "observedActiveDays": 2,
+            "timezone": "unverified"
+          },
+          "regularity": "regular"
+        },
+        "primary": {
+          "id": "P011:1:standout-live",
+          "key": "standout-live",
+          "priority": 86,
+          "topic": "Öne çıkan yayın",
+          "meaning": "Sentetik örnek: bir yayın izleyici sayısında diğerinden belirgin biçimde yüksek.",
+          "evidenceIds": [
+            "P011:1:s0",
+            "P011:1:s1",
+            "P011:1:standout-comparison"
+          ],
+          "adviceCodes": [
+            "BS-I05"
+          ],
+          "limits": [
+            "Yalnız görülebilen, ölçülebilir yayınlar sayıldı. Ortalamaları yeniden ortalama alma. Bu eşik ajans hedefidir; izleyicilerin neden veya hangi anda ayrıldığı bilinmiyor."
+          ],
+          "role": "topic",
+          "confidence": "high",
+          "actions": [
+            {
+              "code": "BS-I05",
+              "family": "retention-focus",
+              "step": "Verilen tarihlerdeki kısa ortalama izlemeyi açıkça belirt ve izleyicilerin yayında daha uzun kalmasına odaklanılmasını öner. Veride belirli bir yöntemin dayanağı yoksa burada bitir; açılış cümlesi, içerik anlatma, soru sorma veya başka hazır reçete ekleme.",
+              "recentlySent": false
+            }
+          ],
+          "selectedAdviceCode": "BS-I05",
+          "repeatNote": null
+        },
+        "support": [],
+        "topicCandidates": [
+          {
+            "id": "P011:1:short-watch",
+            "key": "short-watch",
+            "priority": 86,
+            "topic": "Görülen yayınlarda 25 saniye altı izleme",
+            "meaning": "Son yedi gündeki ölçülebilir 2 yayının 2 tanesinde izleyici başına ortalama izleme 25 saniyenin altında. Yalnız iki veya üç ölçüm var: “bu yayınlarda” diyerek sınırla; “sık tekrarlanıyor”, “genellikle” veya kalıcı alışkanlık deme. Gelenlerin yayında daha uzun kalmasına odaklanılmasını öner.",
+            "evidenceIds": [
+              "P011:1:watch-frequency",
+              "P011:1:s1",
+              "P011:1:s0"
+            ],
+            "adviceCodes": [
+              "BS-I05"
+            ],
+            "limits": [
+              "Yalnız görülebilen, ölçülebilir yayınlar sayıldı. Ortalamaları yeniden ortalama alma. Bu eşik ajans hedefidir; izleyicilerin neden veya hangi anda ayrıldığı bilinmiyor."
+            ],
+            "role": "topic",
+            "confidence": "high",
+            "actions": [
+              {
+                "code": "BS-I05",
+                "family": "retention-focus",
+                "step": "Verilen tarihlerdeki kısa ortalama izlemeyi açıkça belirt ve izleyicilerin yayında daha uzun kalmasına odaklanılmasını öner. Veride belirli bir yöntemin dayanağı yoksa burada bitir; açılış cümlesi, içerik anlatma, soru sorma veya başka hazır reçete ekleme.",
+                "recentlySent": false
+              }
+            ],
+            "selectedAdviceCode": "BS-I05",
+            "repeatNote": null
+          },
+          {
+            "id": "P011:1:standout-live",
+            "key": "standout-live",
+            "priority": 82,
+            "topic": "Belirgin güçlü yayını yeniden deneme",
+            "meaning": "2026-09-16 yayınında gelen izleyici sayısı, benzer uzunluk ve türdeki 2026-09-19 yayınına göre belirgin yüksek. Hangi sonuçta öne çıktığını tarih vererek belirt; o yayında işe yaradığını düşündüğü şeyleri yeniden denemesini öner.",
+            "evidenceIds": [
+              "P011:1:s0",
+              "P011:1:s1",
+              "P011:1:standout-comparison"
+            ],
+            "adviceCodes": [
+              "BS-P01"
+            ],
+            "limits": [
+              "Yalnız bu yayınların karşılaştırmasıdır; tüm yayınların en iyisi veya kalıcı trend değildir. Yayın içeriği ve farkın nedeni bilinmiyor."
+            ],
+            "role": "topic",
+            "confidence": "medium",
+            "actions": [
+              {
+                "code": "BS-P01",
+                "family": "repeat-own-approach",
+                "step": "Belirgin güçlü yayının tarihini ve hangi sonuçta öne çıktığını söyle. O yayında işe yaradığını düşündüğü şeyleri sonraki benzer yayınlarında yeniden deneyebileceğini belirt. Ne yaptığını biliyormuş gibi davranma; aynı sonucun tekrarlanacağını vaat etme.",
+                "recentlySent": false
+              }
+            ],
+            "selectedAdviceCode": "BS-P01",
+            "repeatNote": null
+          },
+          {
+            "id": "P011:1:reach",
+            "key": "reach",
+            "priority": 68,
+            "topic": "İzleme korunurken erişim farkı",
+            "meaning": "Bu iki benzer yayında gelen kişi sayısı daha düşükken izleme süresi korunuyor. Ana değerlendirmede erişim ihtiyacını destekleyebilir.",
+            "evidenceIds": [
+              "P011:1:s0",
+              "P011:1:s1"
+            ],
+            "adviceCodes": [],
+            "limits": [
+              "Duyuru yapmadığını, algoritmanın cezalandırdığını veya içerik türünü varsayma."
+            ],
+            "role": "supporting_observation",
+            "confidence": "medium",
+            "actions": [],
+            "selectedAdviceCode": null,
+            "repeatNote": null
+          }
+        ],
+        "supportingObservations": [
+          {
+            "id": "P011:1:reach",
+            "key": "reach",
+            "priority": 68,
+            "topic": "İzleme korunurken erişim farkı",
+            "meaning": "Bu iki benzer yayında gelen kişi sayısı daha düşükken izleme süresi korunuyor. Ana değerlendirmede erişim ihtiyacını destekleyebilir.",
+            "evidenceIds": [
+              "P011:1:s0",
+              "P011:1:s1"
+            ],
+            "adviceCodes": [],
+            "limits": [
+              "Duyuru yapmadığını, algoritmanın cezalandırdığını veya içerik türünü varsayma."
+            ],
+            "role": "supporting_observation",
+            "confidence": "medium",
+            "actions": [],
+            "selectedAdviceCode": null,
+            "repeatNote": null
+          }
+        ],
+        "requiredFindingIds": [
+          "P011:1:standout-live"
+        ],
+        "evidence": [
+          {
+            "id": "P011:1:watch-frequency",
+            "kind": "session_pattern",
+            "source": "calculatedFacts.sessions",
+            "from": "2026-09-14",
+            "to": "2026-09-20",
+            "thresholdSeconds": 25,
+            "belowThresholdCount": 2,
+            "measuredSessionCount": 2,
+            "belowThresholdShare": 1,
+            "scope": "observed_sessions",
+            "languageScope": "observed_lives",
+            "observations": [
+              {
+                "factId": "fixture_user:session:0",
+                "source": "sessions.rows[0]",
+                "displayedDate": "2026-09-16",
+                "averageWatchSeconds": 20
+              },
+              {
+                "factId": "fixture_user:session:1",
+                "source": "sessions.rows[1]",
+                "displayedDate": "2026-09-19",
+                "averageWatchSeconds": 20
+              }
+            ],
+            "display": {
+              "duration": null,
+              "averageWatch": null,
+              "diamonds": null
+            }
+          },
+          {
+            "id": "P011:1:s1",
+            "kind": "single_live",
+            "factId": "fixture_user:session:1",
+            "source": "sessions.rows[1]",
+            "start": "19.09.2026 12:00:00",
+            "displayedDate": "2026-09-19",
+            "durationSeconds": 3720,
+            "meets60Minutes": true,
+            "secondsTo60Minutes": 0,
+            "diamonds": 0,
+            "viewers": 70,
+            "averageWatchSeconds": 20,
+            "type": "Normal",
+            "newFollowers": null,
+            "commenters": null,
+            "gifters": null,
+            "impressions": null,
+            "display": {
+              "duration": "1 saat 2 dakika",
+              "averageWatch": "20 saniye",
+              "diamonds": "0"
+            }
+          },
+          {
+            "id": "P011:1:s0",
+            "kind": "single_live",
+            "factId": "fixture_user:session:0",
+            "source": "sessions.rows[0]",
+            "start": "16.09.2026 12:00:00",
+            "displayedDate": "2026-09-16",
+            "durationSeconds": 3900,
+            "meets60Minutes": true,
+            "secondsTo60Minutes": 0,
+            "diamonds": 0,
+            "viewers": 186,
+            "averageWatchSeconds": 20,
+            "type": "Normal",
+            "newFollowers": null,
+            "commenters": null,
+            "gifters": null,
+            "impressions": null,
+            "display": {
+              "duration": "1 saat 5 dakika",
+              "averageWatch": "20 saniye",
+              "diamonds": "0"
+            }
+          },
+          {
+            "id": "P011:1:standout-comparison",
+            "kind": "session_comparison",
+            "source": "calculatedFacts.sessions",
+            "metric": "viewers",
+            "betterFactId": "fixture_user:session:0",
+            "otherFactId": "fixture_user:session:1",
+            "betterValue": 186,
+            "otherValue": 70,
+            "ratio": 2.657142857142857,
+            "betterDate": "2026-09-16",
+            "otherDate": "2026-09-19",
+            "display": {
+              "duration": null,
+              "averageWatch": null,
+              "diamonds": null
+            }
+          }
+        ],
+        "checks": [
+          {
+            "area": "session-integrity",
+            "invalidSessionDates": 0,
+            "duplicateSessionCount": 0
+          },
+          {
+            "area": "regularity",
+            "result": "observed-window-usable",
+            "zeroConflict": true
+          },
+          {
+            "area": "diamonds",
+            "result": "no-material-change",
+            "previous": 0,
+            "recent": 0
+          }
+        ],
+        "limits": [
+          "Günlük toplam tek yayın değildir. Günlük UTC ile yayınların görüntülenen tarihlerini birleştirme.",
+          "Veri yayın içeriğini, teknik sorunu ve davranışın nedenini göstermez.",
+          "Geçerli yayın günü sayısı hesaplanmadı."
+        ],
+        "previousSentMessages": [],
+        "noMessageReason": null,
+        "noMessageDetails": null,
+        "considered": [
+          {
+            "id": "P011:1:short-watch",
+            "key": "short-watch",
+            "priority": 86,
+            "topic": "Görülen yayınlarda 25 saniye altı izleme",
+            "role": "topic",
+            "selected": true
+          },
+          {
+            "id": "P011:1:standout-live",
+            "key": "standout-live",
+            "priority": 82,
+            "topic": "Belirgin güçlü yayını yeniden deneme",
+            "role": "topic",
+            "selected": false
+          },
+          {
+            "id": "P011:1:reach",
+            "key": "reach",
+            "priority": 68,
+            "topic": "İzleme korunurken erişim farkı",
+            "role": "supporting_observation",
+            "selected": false
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "P048",
+      "messageBrief": {
+        "version": 2,
+        "responseMode": "coaching",
+        "recordKey": "P048:1",
+        "creatorKey": "username:fixture_user",
+        "username": "fixture_user",
+        "policyVersion": 6,
+        "firstFeedback": true,
+        "observationWindow": {
+          "from": "2026-09-07",
+          "to": "2026-09-20",
+          "complete": true,
+          "days": 14
+        },
+        "overallContext": {
+          "activityComparison": {
+            "comparable": true,
+            "durationChangeRatio": null,
+            "durationPreserved": false,
+            "fewerDaysWithPreservedDuration": false,
+            "significantDurationDrop": false
+          },
+          "coverage": {
+            "from": "2026-09-07",
+            "to": "2026-09-20",
+            "complete": true,
+            "missingDates": [],
+            "duplicateDates": [],
+            "beforeJoining": false
+          },
+          "observation": {
+            "activeDays": 0,
+            "observedActiveDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 0,
+            "lastActiveDate": null
+          },
+          "previous7": {
+            "from": "2026-09-07",
+            "to": "2026-09-13",
+            "complete": true,
+            "activeDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 0,
+            "diamondsPerHour": null
+          },
+          "recent7": {
+            "from": "2026-09-14",
+            "to": "2026-09-20",
+            "complete": true,
+            "activeDays": 0,
+            "durationSeconds": 0,
+            "diamonds": 0,
+            "diamondsPerHour": null
+          },
+          "sessions": {
+            "observedCount": 3,
+            "recentCount": 3,
+            "observedActiveDays": 3,
+            "timezone": "unverified"
+          },
+          "regularity": "regular"
+        },
+        "primary": {
+          "id": "P048:1:short-lives",
+          "key": "short-lives",
+          "priority": 88,
+          "topic": "Tek yayında bir saatin sık tamamlanmaması",
+          "meaning": "Son yedi günün görülebilen yayınlarında 3 ayrı günde tek yayında bir saat tamamlanmamış. Ara sıra kısa yayın sorun değildir; burada tekrarlanan durumu ve sonraki yayın günlerinde tek yayında bir saat hedefini anlat.",
+          "evidenceIds": [
+            "P048:1:short-live-frequency",
+            "P048:1:s2",
+            "P048:1:s1"
+          ],
+          "adviceCodes": [
+            "BS-S01",
+            "BS-S02"
+          ],
+          "limits": [
+            "Görülen tarihlerdeki örüntüdür; tam geçmiş veya platform geçerli gün sayısı değildir. Gelecek yayınlarda aynı yayın günündeki bir saat koşulunu koru."
+          ],
+          "role": "topic",
+          "confidence": "high",
+          "actions": [
+            {
+              "code": "BS-S01",
+              "family": "duration",
+              "step": "Sonraki yayın günlerinde, o gün başka bir yayında bir saat dolmadıysa tek yayında en az bir saati tamamlamayı öner. Ajansın trafik geliştirme hedefi açısından bir saati tamamlamanın önemini, kısa yayınların beklenen trafik katkısını sağlamadığını anlat. Kesin algoritma kuralı veya trafik garantisi verme.",
+              "recentlySent": false
+            },
+            {
+              "code": "BS-S02",
+              "family": "preparation",
+              "step": "Benzer kısa yayınları bir saate taşıyabilmek için kendi içeriğinde ele alacağı birkaç başlığı önceden seçmeyi denemesini öner.",
+              "recentlySent": false
+            }
+          ],
+          "selectedAdviceCode": "BS-S01",
+          "repeatNote": null
+        },
+        "support": [],
+        "topicCandidates": [
+          {
+            "id": "P048:1:short-lives",
+            "key": "short-lives",
+            "priority": 88,
+            "topic": "Tek yayında bir saatin sık tamamlanmaması",
+            "meaning": "Son yedi günün görülebilen yayınlarında 3 ayrı günde tek yayında bir saat tamamlanmamış. Ara sıra kısa yayın sorun değildir; burada tekrarlanan durumu ve sonraki yayın günlerinde tek yayında bir saat hedefini anlat.",
+            "evidenceIds": [
+              "P048:1:short-live-frequency",
+              "P048:1:s2",
+              "P048:1:s1"
+            ],
+            "adviceCodes": [
+              "BS-S01",
+              "BS-S02"
+            ],
+            "limits": [
+              "Görülen tarihlerdeki örüntüdür; tam geçmiş veya platform geçerli gün sayısı değildir. Gelecek yayınlarda aynı yayın günündeki bir saat koşulunu koru."
+            ],
+            "role": "topic",
+            "confidence": "high",
+            "actions": [
+              {
+                "code": "BS-S01",
+                "family": "duration",
+                "step": "Sonraki yayın günlerinde, o gün başka bir yayında bir saat dolmadıysa tek yayında en az bir saati tamamlamayı öner. Ajansın trafik geliştirme hedefi açısından bir saati tamamlamanın önemini, kısa yayınların beklenen trafik katkısını sağlamadığını anlat. Kesin algoritma kuralı veya trafik garantisi verme.",
+                "recentlySent": false
+              },
+              {
+                "code": "BS-S02",
+                "family": "preparation",
+                "step": "Benzer kısa yayınları bir saate taşıyabilmek için kendi içeriğinde ele alacağı birkaç başlığı önceden seçmeyi denemesini öner.",
+                "recentlySent": false
+              }
+            ],
+            "selectedAdviceCode": "BS-S01",
+            "repeatNote": null
+          },
+          {
+            "id": "P048:1:short-watch",
+            "key": "short-watch",
+            "priority": 86,
+            "topic": "Görülen yayınlarda 25 saniye altı izleme",
+            "meaning": "Son yedi gündeki ölçülebilir 3 yayının 3 tanesinde izleyici başına ortalama izleme 25 saniyenin altında. Yalnız iki veya üç ölçüm var: “bu yayınlarda” diyerek sınırla; “sık tekrarlanıyor”, “genellikle” veya kalıcı alışkanlık deme. Gelenlerin yayında daha uzun kalmasına odaklanılmasını öner.",
+            "evidenceIds": [
+              "P048:1:watch-frequency",
+              "P048:1:s2",
+              "P048:1:s1"
+            ],
+            "adviceCodes": [
+              "BS-I05"
+            ],
+            "limits": [
+              "Yalnız görülebilen, ölçülebilir yayınlar sayıldı. Ortalamaları yeniden ortalama alma. Bu eşik ajans hedefidir; izleyicilerin neden veya hangi anda ayrıldığı bilinmiyor."
+            ],
+            "role": "topic",
+            "confidence": "high",
+            "actions": [
+              {
+                "code": "BS-I05",
+                "family": "retention-focus",
+                "step": "Verilen tarihlerdeki kısa ortalama izlemeyi açıkça belirt ve izleyicilerin yayında daha uzun kalmasına odaklanılmasını öner. Veride belirli bir yöntemin dayanağı yoksa burada bitir; açılış cümlesi, içerik anlatma, soru sorma veya başka hazır reçete ekleme.",
+                "recentlySent": false
+              }
+            ],
+            "selectedAdviceCode": "BS-I05",
+            "repeatNote": null
+          }
+        ],
+        "supportingObservations": [],
+        "requiredFindingIds": [
+          "P048:1:short-lives"
+        ],
+        "evidence": [
+          {
+            "id": "P048:1:short-live-frequency",
+            "kind": "session_pattern",
+            "source": "calculatedFacts.sessionDays",
+            "from": "2026-09-14",
+            "to": "2026-09-20",
+            "observedShortDays": 3,
+            "observedActiveDays": 3,
+            "minimumSeconds": 3600,
+            "days": [
+              {
+                "displayedDate": "2026-09-19",
+                "observedSessionCount": 1,
+                "unknownDurationCount": 0,
+                "observedTotalSeconds": 1800,
+                "longestSessionSeconds": 1800,
+                "longestSessionFactId": "fixture_user:session:2",
+                "hasObserved60MinuteSession": false,
+                "near60MinuteSessionIds": []
+              },
+              {
+                "displayedDate": "2026-09-17",
+                "observedSessionCount": 1,
+                "unknownDurationCount": 0,
+                "observedTotalSeconds": 1800,
+                "longestSessionSeconds": 1800,
+                "longestSessionFactId": "fixture_user:session:1",
+                "hasObserved60MinuteSession": false,
+                "near60MinuteSessionIds": []
+              },
+              {
+                "displayedDate": "2026-09-14",
+                "observedSessionCount": 1,
+                "unknownDurationCount": 0,
+                "observedTotalSeconds": 1800,
+                "longestSessionSeconds": 1800,
+                "longestSessionFactId": "fixture_user:session:0",
+                "hasObserved60MinuteSession": false,
+                "near60MinuteSessionIds": []
+              }
+            ],
+            "scope": "observed_sessions",
+            "timezone": "unverified",
+            "display": {
+              "duration": null,
+              "averageWatch": null,
+              "diamonds": null
+            }
+          },
+          {
+            "id": "P048:1:s2",
+            "kind": "single_live",
+            "factId": "fixture_user:session:2",
+            "source": "sessions.rows[2]",
+            "start": "19.09.2026 12:00:00",
+            "displayedDate": "2026-09-19",
+            "durationSeconds": 1800,
+            "meets60Minutes": false,
+            "secondsTo60Minutes": 1800,
+            "diamonds": 0,
+            "viewers": 100,
+            "averageWatchSeconds": 20,
+            "type": "Normal",
+            "newFollowers": null,
+            "commenters": null,
+            "gifters": null,
+            "impressions": null,
+            "display": {
+              "duration": "30 dakika",
+              "averageWatch": "20 saniye",
+              "diamonds": "0"
+            }
+          },
+          {
+            "id": "P048:1:s1",
+            "kind": "single_live",
+            "factId": "fixture_user:session:1",
+            "source": "sessions.rows[1]",
+            "start": "17.09.2026 12:00:00",
+            "displayedDate": "2026-09-17",
+            "durationSeconds": 1800,
+            "meets60Minutes": false,
+            "secondsTo60Minutes": 1800,
+            "diamonds": 0,
+            "viewers": 100,
+            "averageWatchSeconds": 20,
+            "type": "Normal",
+            "newFollowers": null,
+            "commenters": null,
+            "gifters": null,
+            "impressions": null,
+            "display": {
+              "duration": "30 dakika",
+              "averageWatch": "20 saniye",
+              "diamonds": "0"
+            }
+          },
+          {
+            "id": "P048:1:watch-frequency",
+            "kind": "session_pattern",
+            "source": "calculatedFacts.sessions",
+            "from": "2026-09-14",
+            "to": "2026-09-20",
+            "thresholdSeconds": 25,
+            "belowThresholdCount": 3,
+            "measuredSessionCount": 3,
+            "belowThresholdShare": 1,
+            "scope": "observed_sessions",
+            "languageScope": "observed_lives",
+            "observations": [
+              {
+                "factId": "fixture_user:session:0",
+                "source": "sessions.rows[0]",
+                "displayedDate": "2026-09-14",
+                "averageWatchSeconds": 20
+              },
+              {
+                "factId": "fixture_user:session:1",
+                "source": "sessions.rows[1]",
+                "displayedDate": "2026-09-17",
+                "averageWatchSeconds": 20
+              },
+              {
+                "factId": "fixture_user:session:2",
+                "source": "sessions.rows[2]",
+                "displayedDate": "2026-09-19",
+                "averageWatchSeconds": 20
+              }
+            ],
+            "display": {
+              "duration": null,
+              "averageWatch": null,
+              "diamonds": null
+            }
+          }
+        ],
+        "checks": [
+          {
+            "area": "session-integrity",
+            "invalidSessionDates": 0,
+            "duplicateSessionCount": 0
+          },
+          {
+            "area": "regularity",
+            "result": "observed-window-usable",
+            "zeroConflict": true
+          },
+          {
+            "area": "diamonds",
+            "result": "no-material-change",
+            "previous": 0,
+            "recent": 0
+          }
+        ],
+        "limits": [
+          "Günlük toplam tek yayın değildir. Günlük UTC ile yayınların görüntülenen tarihlerini birleştirme.",
+          "Veri yayın içeriğini, teknik sorunu ve davranışın nedenini göstermez.",
+          "Geçerli yayın günü sayısı hesaplanmadı."
+        ],
+        "previousSentMessages": [],
+        "noMessageReason": null,
+        "noMessageDetails": null,
+        "considered": [
+          {
+            "id": "P048:1:short-lives",
+            "key": "short-lives",
+            "priority": 88,
+            "topic": "Tek yayında bir saatin sık tamamlanmaması",
+            "role": "topic",
+            "selected": true
+          },
+          {
+            "id": "P048:1:short-watch",
+            "key": "short-watch",
+            "priority": 86,
+            "topic": "Görülen yayınlarda 25 saniye altı izleme",
+            "role": "topic",
+            "selected": false
+          }
+        ]
+      }
+    }
+  ]
+}

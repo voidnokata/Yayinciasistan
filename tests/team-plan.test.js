@@ -1,0 +1,43 @@
+const assert=require('node:assert/strict');
+const {parseRows,mergeRecords,distribute}=require('../src/core/team-plan-core');
+const rows=parseRows([['Yayıncı ID','Sınıf','Kısa Değerlendirme'],['@test_1',3,'Güçlü.'],['test_2','2. sınıf','Düzenli.']]);
+assert.equal(rows.length,2);assert.equal(rows[0].username,'test_1');
+assert.throws(()=>parseRows([['Yayıncı ID','Takipçi'],['test',30000]]),/başlıkları/);
+assert.throws(()=>parseRows([['Yayıncı ID','Sınıf'],['test',4]],'dosya.xlsx'),/dosya.xlsx, satır 2/);
+const zero=parseRows([['Yayıncı ID','Sınıf'],['test',0]]);
+assert.equal(zero[0].classId,0);
+assert.equal(distribute(zero,[{name:'Burak'}]).totals[0].classes[0],1);
+const merged=mergeRecords([...rows,{username:'TEST_1',classId:1,summary:'Eski'}]);
+assert.equal(merged.rows.length,2);assert.equal(merged.conflicts,1);assert.equal(merged.rows[0].summary,'Güçlü.');
+const publishers=Array.from({length:60},(_,i)=>({username:`test_${i}`,classId:i<24?3:i<42?2:1,summary:'Not'}));
+const members=[{name:'Ali',priority:true},{name:'Ece',priority:false},{name:'Can',priority:false}];
+const plan=distribute(publishers,members);
+assert.equal(plan.rows.length,60);assert.equal(new Set(plan.rows.map(r=>r.username)).size,60);
+assert.deepEqual(plan.totals.map(m=>m.total),[20,20,20]);
+assert.ok(plan.totals[0].classes[3]>plan.totals[1].classes[3]*2);
+for(const n of [1,3,6,7,50]){
+ const p=distribute(publishers,Array.from({length:n},(_,i)=>({name:`Kisi ${i}`})));
+ assert.ok(Math.max(...p.totals.map(m=>m.total))-Math.min(...p.totals.map(m=>m.total))<=1);
+}
+assert.throws(()=>distribute(rows,[{name:''}]),/isimlerini/);
+assert.throws(()=>distribute(rows,[{name:'Ali'},{name:'ali'}]),/farklı/);
+const small=distribute([{username:'xx',classId:3}],members);assert.equal(small.rows[0].member,'Ali');
+const all=distribute(publishers,members.map(m=>({...m,priority:true})));assert.deepEqual(all.totals.map(m=>m.classes[3]),[8,8,8]);
+console.log('Takım planı: içe aktarma, tekilleştirme, 3 kat öncelik, denge ve değişken üye sayısı testleri geçti.');
+
+const now=Date.parse('2026-09-07T12:00:00Z'), day=86400000;
+const one=[{username:'deneme1',classId:3,summary:'Yüksek takipçi.'}];
+const team=[{name:'Burak',priority:true},{name:'Yağız'},{name:'Emrina'}];
+const past=(who,age)=>({id:who,createdAt:new Date(now-age*day).toISOString(),rows:[{...one[0],member:who}]});
+const waiting=distribute(one,team,[past('Burak',1)],now,true);
+assert.equal(waiting.waiting,1);assert.equal(waiting.rows.length,0);assert.equal(waiting.exhausted.length,0);
+const rotated=distribute(one,team,[past('Burak',3)],now,true);
+assert.equal(rotated.rows[0].member,'Yağız');assert.match(rotated.rows[0].report,/3 gün önce Burak yazdı \/ hâlâ müsait/);
+assert.equal(distribute(one,team,[past('Burak',2.999)],now).waiting,1);
+const allTried=[past('Burak',9),past('Yağız',6),past('Emrina',3)];
+const done=distribute(one,team,allTried,now,true);
+assert.equal(done.rows.length,0);assert.equal(done.exhausted.length,1);assert.match(done.exhausted[0].report,/Tüm ekip yazdı/);
+assert.match(distribute(one,team,[past('Burak',5)],now).rows[0].report,/güncel uygunluk doğrulanmadı/);
+assert.equal(distribute(one,[...team,{name:'Yeni Üye'}],allTried,now).rows[0].member,'Yeni Üye');
+assert.equal(allTried.length,3);
+console.log('72 saat sınırı, üye rotasyonu, tüm ekip denedi ve uygunluk raporu testleri geçti.');

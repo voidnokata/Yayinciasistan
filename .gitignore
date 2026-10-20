@@ -1,0 +1,14 @@
+# Local data and generated exports
+outputs/
+work/
+node_modules/
+BTG_Geribildirim_*/
+*.log
+.env
+.env.*
+!.env.example
+*.xlsx
+!tests/sample-usernames.xlsx
+KALDIGIMIZ_YER.md
+.DS_Store
+Thumbs.db

@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Özel davetler · BTG</title><link rel="stylesheet" href="team-plan.css"><link rel="stylesheet" href="invitations.css"></head>
+<body><main>
+<header><div class="brand">BTG</div><div><p class="eyebrow">İSİM TOPLAMA</p><h1>3. sınıflara özel davet hazırla</h1><p>Yayıncı canlıyken kaydedilen verilerden kişiye özel mesajlar.</p></div></header>
+<section><h2>1. İsim Toplama Excel’ini seç</h2><p>Yeni İsim Toplama çıktısını yükleyin. Mesajlar Excel’deki ölçümlerden hazırlanır; yayıncının yeniden canlı olması gerekmez. 14 günden eski kayıtlar ve yeterli ölçümü olmayan satırlar işaretlenir.</p><input id="file" type="file" accept=".xlsx" aria-label="İsim Toplama Excel dosyası"><p id="status" role="status">Henüz dosya seçilmedi.</p></section>
+<p id="error" role="alert"></p>
+<section><h2>Excel’de veriler eksikse</h2><p>Eski Excel yalnızca üç sütun içeriyorsa veya yeni ölçüm sütunları boşsa, eklentide saklanan son toplama kaydını deneyin. Bir Excel yüklediyseniz yalnız o dosyadaki 3. sınıf kullanıcılar eşleştirilir. Kayıt tarihi değiştirilmez ve eksik sayılar tahmin edilmez.</p><button id="recover" type="button">Son toplama kaydından kurtar</button></section>
+<section id="result" hidden><h2>2. Mesajları incele ve düzenle</h2><p>Yayın geçmişi, ekranda görülebilen kayıtlarla sınırlıdır. Boş mesajlı satırlar Listeden Kontrol’e alınmaz.</p><div id="preview"></div></section>
+<div class="actions"><button id="save" class="primary" disabled>İki Excel’i kaydet — özel davetler ve standart liste</button></div>
+<p>İlk dosya 3. sınıfları ve özel mesajlarını; ikinci dosya 3. sınıflar dışındaki yayıncıları içerir. Mesajı eksik 3. sınıflar özel dosyada durumlarıyla korunur. Listeden Kontrol’de ilk dosyayı <strong>Özel davet Excel’i yükle</strong>, ikinci dosyayı <strong>Standart liste Excel’i yükle</strong> alanından seçin. Bu iki yeni dosyayı kullanın; orijinal karma listeyi tekrar işleme almayın. Gönderimi Başlat düğmesi başlatır.</p>
+</main><script src="../core/output-folder.js"></script><script src="../core/xlsx-reader.js"></script><script src="../core/xlsx-writer.js"></script><script src="../core/invitation-core.js"></script><script src="invitations.js"></script></body></html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BTG — Doğrudan sorgu denemesi</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="backstage-api-test.css">
+</head>
+<body>
+<main>
+  <header><div class="brand-mark">BTG</div><div><h1>Doğrudan sorgu denemesi</h1><p id="version"></p></div></header>
+  <section class="settings-card">
+    <p>Seçtiğiniz yöntemle tek yayıncıyı sorgular. Mesaj veya davet göndermez; otomasyonu başlatmaz ve yayıncı geçmişine kayıt eklemez.</p>
+    <p>Backstage oturumuyla deneme, arka planda geçici bir sekme açar ve işlem sonunda kapatır. Açık sekmelerinizi değiştirmez. TikTok oturumunuzun açık olması gerekir.</p>
+    <form id="probeForm">
+      <label for="mode">Sorgu yöntemi</label>
+      <select id="mode">
+        <option value="page" selected>Backstage oturumuyla API — yeni deneme</option>
+        <option value="worker">Bağımsız API — önceki deneme</option>
+      </select>
+      <label for="username">TikTok kullanıcı adı</label>
+      <input id="username" name="username" value="yett.34" maxlength="25" autocomplete="off" spellcheck="false" required>
+      <button id="probeButton" class="primary" type="submit">Doğrudan sorgula</button>
+    </form>
+  </section>
+  <section class="status-card" aria-live="polite">
+    <h2>Sonuç</h2><p id="summary">Henüz sorgu yapılmadı.</p>
+    <p id="detail">Deneme sonucuna göre otomasyona geçiş değerlendirilecek.</p>
+  </section>
+  <section class="settings-card">
+    <h2>Paylaşılabilir tanılama</h2>
+    <p>Kullanıcı adı, süre, durum kodları, kısıtlama işaretleri ve yanıtın yapısal özeti gösterilir. Ham yanıt veya token değerleri kopyalanmaz.</p>
+    <textarea id="diagnostic" rows="16" readonly aria-label="Paylaşılabilir tanılama sonucu" spellcheck="false"></textarea>
+    <button id="copyButton" type="button" disabled>Sonucu kopyala</button>
+    <p id="copyStatus" role="status"></p>
+  </section>
+</main>
+<script src="backstage-api-test.js"></script>
+</body>
+</html>

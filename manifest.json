@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "BTG TikTok Yayıncı Asistanı",
+  "version": "0.4.54",
+  "description": "TikTok yayıncılarını LIVE Backstage üzerinde kontrol eder; uygun hesaplara DM gönderir, ID ve takipçi sayılarını Excel'e toplar veya kişisel mesaj için model notu hazırlar.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation",
+    "debugger",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://www.tiktok.com/*",
+    "https://tiktok.com/*",
+    "https://*.tiktok.com/*",
+    "https://live-backstage.tiktok.com/*",
+    "http://127.0.0.1:8765/*",
+    "https://www.tikleap.com/*",
+    "https://tikleap.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+  "action": {
+    "default_title": "BTG Yayıncı Asistanı",
+    "default_popup": "src/ui/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.tiktok.com/*",
+        "https://tiktok.com/*",
+        "https://*.tiktok.com/*"
+      ],
+      "js": [
+        "src/core/xlsx-writer.js",
+        "src/core/talent-score.js",
+        "src/core/personal-profile.js",
+        "src/content/tiktok-content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "https://live-backstage.tiktok.com/*"
+      ],
+      "js": [
+        "src/content/tiktok-content.js",
+        "src/content/backstage-content.js",
+        "src/content/feedback-content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
